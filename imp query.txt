@@ -1,0 +1,6 @@
+SELECT b.* FROM off_patent b WHERE b.patno IN (SELECT patno FROM off_patent_lab_mapping WHERE lab='ngri')
+
+
+
+
+SELECT lm.lab_id,lm.lab_shortname,lm.lab_fullname, p.*, TRIM(p.title) AS tit, DATE_FORMAT(p.issuedate,'%d-%m-%Y') AS idate, DATE_FORMAT(p.filedate,'%d-%m-%Y') AS fdate FROM lab_master lm, patent p WHERE p.lablink=lm.lab_shortname AND p.examiner='application' AND filedate >= DATE_SUB(NOW(),INTERVAL 4  YEAR) ORDER BY issuedate
